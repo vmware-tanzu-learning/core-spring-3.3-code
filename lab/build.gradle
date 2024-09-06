@@ -1,0 +1,60 @@
+buildscript {
+    ext {
+        springBootVersion = "3.3.1"
+        easyMockVersion = "5.2"
+        jmonVersion = "2.82"
+    }
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion"
+}
+
+allprojects {
+    apply plugin: 'maven-publish'
+
+    group = 'io.spring.training.core-spring'
+    version = '3.3.1'
+}
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: "io.spring.dependency-management"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+        }
+    }
+
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter"
+        implementation "org.springframework.boot:spring-boot-starter-jdbc"
+        implementation "org.hsqldb:hsqldb"
+
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}

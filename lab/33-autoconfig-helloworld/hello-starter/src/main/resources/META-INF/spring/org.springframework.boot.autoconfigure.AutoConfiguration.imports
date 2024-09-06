@@ -1,0 +1,3 @@
+# TO-DO-32: Add "com.starter.HelloAutoConfig" (without quotes)
+#           Now Spring Boot will use "com.starter.HelloAutoConfig"
+#           as part of its auto-configuration.

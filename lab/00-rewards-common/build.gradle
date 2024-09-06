@@ -1,0 +1,6 @@
+apply plugin: 'java-library'
+
+dependencies {
+    api "org.hibernate.orm:hibernate-core"
+    api "com.fasterxml.jackson.core:jackson-annotations"
+}
